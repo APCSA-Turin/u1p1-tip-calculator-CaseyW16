@@ -1,6 +1,8 @@
 package com.example.project;
+import java.util.Scanner;
 
-public class TipCalculator {
+public class ExtraCredit {
+    // WRITE YOUR PROGRAM IN calculateTip
 
     public static String formatMoney(double decimal) {
         decimal = Math.round(decimal * 100) / 100.0;
@@ -11,7 +13,7 @@ public class TipCalculator {
         return str + "\n";
     }
 
-    public static String calculateTip(int people, int percent, double cost) { // You must use these  variable in your calculations
+    public static String calculateTip(int people, int percent, double cost, String items) { // You must use these  variable in your calculations
         // DO NOT DELETE ANY OF THE CODE BELOW      
         StringBuilder result = new StringBuilder();
 
@@ -29,17 +31,34 @@ public class TipCalculator {
         result.append("Tip per person: " + formatMoney(tipsPerPerson));
         result.append("Total cost per person: " + formatMoney(totalCostPerPerson));
         result.append("-------------------------------\n");
+        result.append("Items ordered: \n" + items);
 
         return result.toString();
     }
      // TEST YOUR PROGRAM IN main
      public static void main(String[] args) {
-        // try different values for people, percent, and cost to test your program before running test cases
-        int people = 12;
-        int percent = 15;
-        double cost = 566.97;
-    
-        System.out.println(calculateTip(people, percent, cost));
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("How many people are in your party? ");
+        int people = scan.nextInt();
+
+        System.out.print("What percent tip? ");
+        int percent = scan.nextInt();
+
+        System.out.print("How much did your meal cost? $");
+        double cost = scan.nextDouble();
+
+        scan.nextLine();
+        String order = "";
+        String items = "";
+        while (true) {
+            System.out.print("Enter an item name or type '-1' to finish: ");
+            order = scan.nextLine();
+            if (order.equals("-1")) break;
+            items += order + "\n";
+        }
+
+        scan.close();
+        System.out.println(calculateTip(people, percent, cost, items));
     }
 }
-        
